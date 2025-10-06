@@ -61,11 +61,55 @@ export function BoxAskWrap() {
     );
 }
 
+const mockQueries = [
+    "Show me leads from last week...",
+    "Which deals are closing this month?...",
+    "Schedule follow-up for top prospects...",
+    "What's my conversion rate this quarter?...",
+    "Find all unqualified leads...",
+];
+
 export const AskForm: React.FC = () => {
+    const [placeholder, setPlaceholder] = useState("");
+    const [queryIndex, setQueryIndex] = useState(0);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [charIndex, setCharIndex] = useState(0);
+
+    useEffect(() => {
+        const currentQuery = mockQueries[queryIndex];
+        const typingSpeed = isDeleting ? 40 : 80;
+
+        if (!isDeleting && charIndex < currentQuery.length) {
+            // Typing forward
+            const timeout = setTimeout(() => {
+                setPlaceholder(currentQuery.slice(0, charIndex + 1));
+                setCharIndex(charIndex + 1);
+            }, typingSpeed);
+            return () => clearTimeout(timeout);
+        } else if (!isDeleting && charIndex === currentQuery.length) {
+            // Pause before deleting
+            const timeout = setTimeout(() => {
+                setIsDeleting(true);
+            }, 1500);
+            return () => clearTimeout(timeout);
+        } else if (isDeleting && charIndex > 0) {
+            // Deleting backward
+            const timeout = setTimeout(() => {
+                setPlaceholder(currentQuery.slice(0, charIndex - 1));
+                setCharIndex(charIndex - 1);
+            }, typingSpeed);
+            return () => clearTimeout(timeout);
+        } else if (isDeleting && charIndex === 0) {
+            // Move to next query
+            setIsDeleting(false);
+            setQueryIndex((queryIndex + 1) % mockQueries.length);
+        }
+    }, [charIndex, queryIndex, isDeleting]);
+
     return (
         <form className="form-ask wow fadeInUp">
             <div className="form-content">
-                <input className="style-2" type="text" placeholder="Ask a follow up..." />
+                <input className="style-2" type="text" placeholder={placeholder} />
 
                 <fieldset className="field-bottom">
                     <div className="field_left">
