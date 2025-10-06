@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function MainFeatureSection() {
-    const [activeTab, setActiveTab] = useState("codeComposer");
+    const [activeTab, setActiveTab] = useState("leadQualification");
 
     return (
         <>
@@ -45,9 +45,8 @@ export default function MainFeatureSection() {
                                 <li key={item.id} className={`nav-tab-item ${activeTab === item.id ? "active" : ""}`} role="presentation">
                                     <button
                                         onClick={() => setActiveTab(item.id)}
-                                        className={`btn_tab tf-btn style-transparent text-body-3 animate-btn ${
-                                            activeTab === item.id ? "active" : ""
-                                        }`}
+                                        className={`btn_tab tf-btn style-transparent text-body-3 animate-btn ${activeTab === item.id ? "active" : ""
+                                            }`}
                                         role="tab"
                                     >
                                         {item.title}
