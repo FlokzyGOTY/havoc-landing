@@ -41,6 +41,18 @@ export const metadata: Metadata = {
     keywords: ["AI Sales", "Sales Automation", "Lead Qualification", "Pipeline Management", "AI Agents", "Sales CRM", "Automated Follow-ups"],
     robots: "index, follow",
     authors: [{ name: "AI Sales Automation" }],
+    openGraph: {
+        title: "AI Sales Automation - Automate Sales & Close More Deals",
+        description: "AI agents that qualify leads, manage your pipeline, and automate follow-ups — so your sales team can focus on closing deals.",
+        type: "website",
+        locale: "en_US",
+        siteName: "AI Sales Automation",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "AI Sales Automation - Automate Sales & Close More Deals",
+        description: "AI agents that qualify leads, manage your pipeline, and automate follow-ups — so your sales team can focus on closing deals.",
+    },
     icons: {
         icon: "/assets/images/logo/favicon.svg",
         shortcut: "/assets/images/logo/favicon.svg",
